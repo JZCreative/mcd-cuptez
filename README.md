@@ -4,7 +4,7 @@
 
 本仓库为「麦当劳程序员创意开发大赛」参赛项目。
 
-🌐 **在线演示（GitHub Pages，静态版）**：https://jzcreative.github.io/mcd-cuptez/
+🌐 **在线演示（GitHub Pages）**：https://jzcreative.github.io/mcd-cuptez/
 
 ---
 
@@ -75,12 +75,12 @@ python3 mcp-proxy.py
 
 代理会托管页面并把同源 `/mcp` 请求转发到 `https://mcp.mcd.cn`，**Token 由服务端注入，不进入客户端代码**。加载即真实拉取当期活动并注入官方主题贴纸。可用环境变量 `MCP_PROXY_PORT` 改端口、`MCD_MCP_TOKEN` 显式指定 Token。
 
-### 方式 C：GitHub Pages 在线演示（静态托管）
+### 方式 C：GitHub Pages 在线演示（可真实联动，需先部署公网代理）
 
 - **在线地址**：https://jzcreative.github.io/mcd-cuptez/
 - 由 GitHub Pages 静态托管，完整 UI、3D 容器、自由创作、艺术家贴纸与导出均可用。
-- **注意**：GitHub Pages 为纯静态托管，无法运行本地 `mcp-proxy.py`，故当期活动官方贴纸包以**静态占位**呈现；创作与导出功能完全不受影响。
-- 如需**真实联动麦当劳 MCP 数据**（当期活动自动注入、订单备注闭环），请使用上方「方式 B」在本机运行。
+- **真实联动麦当劳 MCP（脱离本地代理）**：GitHub Pages 是纯静态托管，浏览器无法直连 `mcp.mcd.cn`（无 CORS 头）。解决办法是再部署一个**公网 serverless 代理**（推荐 Cloudflare Worker，约 2 分钟，Token 存为 Secret 不进代码），详见 [`deploy/DEPLOY.md`](./deploy/DEPLOY.md)。部署后把 Worker 地址填入根目录 `config.js` 的 `window.MCP_PROXY_URL`，在线版即自动同步当期活动、注入官方主题贴纸、支持订单备注闭环——**全程无需你的本地 `mcp-proxy.py`**。
+- 若未部署代理，在线版会**优雅降级**为离线演示（创作与导出功能不受影响）。
 
 ---
 

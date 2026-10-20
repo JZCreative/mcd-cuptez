@@ -31,6 +31,7 @@
 @media(max-width:360px){.selection-row{gap:5px}.selection-controls #itemScale{width:48px}.selection-controls #itemRotation{width:133px}}
 #cv[data-tool="pen"] .movable,#cv[data-tool="eraser"] .movable{cursor:crosshair}#cv[data-tool="text"] .movable{cursor:text}
 </style>
+<script src="config.js"></script>
 </head>
 <body>
 <main class="phone" aria-label="麦麦创贴创作台">
@@ -4247,8 +4248,11 @@ $('artUpload').onclick=()=>{$('artFiles').value='';$('artFiles').click();};$('ar
 renderCups();renderPalette();renderTabs();renderGrid();setCup(activeCup);
 
 /* ===================== 麦当劳 MCP 真实接入 =====================
-   浏览器无法直连 mcp.mcd.cn（无 CORS 头），统一走同源本地代理 /mcp
-   （mcp-proxy.py 持有 Token 并转发，Token 不进客户端代码）。
+   浏览器无法直连 mcp.mcd.cn（无 CORS 头）。代理地址按以下顺序解析：
+     1) URL 参数 ?proxy=...  2) config.js 的 window.MCP_PROXY_URL
+     3) 本地开发（127.0.0.1/localhost）走同源 /mcp（由 mcp-proxy.py 提供）
+   公网部署时把 Worker 地址填入 config.js 即可脱离本地代理（详见 deploy/DEPLOY.md）。
+   Token 始终只在服务端（mcp-proxy.py 或 Cloudflare Worker Secret）持有，不进客户端代码。
    读操作（campaign-calendar / now-time-info）加载即调用；
    写操作（create-order）必须经用户显式二次确认。                       */
 function parseMCP(text){
@@ -4262,7 +4266,8 @@ function parseMCP(text){
   try{return JSON.parse(text);}catch(e){return {};}
 }
 async function mcpRaw(payload){
-  const r=await fetch('/mcp',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json, text/event-stream'},body:JSON.stringify(payload)});
+  const API_BASE=window.MCP_PROXY_URL||new URLSearchParams(location.search).get('proxy')||(['127.0.0.1','localhost'].includes(location.hostname)?'/mcp':'/mcp');
+  const r=await fetch(API_BASE,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json, text/event-stream'},body:JSON.stringify(payload)});
   return parseMCP(await r.text());
 }
 async function mcpHandshake(){

@@ -40,15 +40,15 @@
       <h2>快乐，由你来贴</h2>
       <p>基于麦当劳中国 MCP（mcd-mcp）的个性化杯贴创作工具。在 3D 容器上自由创作，随时调用艺术家贴纸提质。</p>
     </div>
-    <a class="enter" href="mcd-cuptez.html">打开在线创作 →</a>
+    <a class="enter" href="mcd-cuptez.standalone.html">打开在线创作（免后端快速浏览）→</a>
     <div class="note">
-      <b>关于在线版：</b>本页面由 GitHub Pages 静态托管，是**纯前端、零后端**的虚拟创作体验，完整 UI、3D 容器、自由创作、艺术家贴纸与导出均可用，开箱即完整体验、无需任何服务端。<br>
-      当期主题与官方贴纸已内置；如已按 <code>deploy/DEPLOY.md</code> 部署公网 MCP 代理并在 <code>config.js</code> 填入地址，页面会<b>自动同步真实麦当劳 MCP 数据</b>作为增强——但<b>非必需</b>，未配置时代码本身即为完整在线体验。
+      <b>这是免后端快速浏览版：</b>GitHub Pages 静态托管，内置虚拟当期活动，完整 UI、3D 容器、自由创作、艺术家贴纸与导出均可用，开箱即完整体验、<b>不调用任何服务端、不接入 MCP</b>——专为快速浏览与分享设计。<br>
+      <b>真实 MCP 体验：</b>主版本 <code>mcd-cuptez.html</code> 会经麦当劳 MCP 拉取真实当期活动并可发起真实点单，需按 README 用 <code>mcp-proxy.py</code>（或部署公网代理）在本地运行。
     </div>
     <div class="links">
+      <a href="mcd-cuptez.standalone.html">免后端快速浏览版（当前在线）<span>→</span></a>
       <a href="https://github.com/JZCreative/mcd-cuptez">GitHub 仓库<span>↗</span></a>
-      <a href="https://github.com/JZCreative/mcd-cuptez/blob/main/README.md">README 与本地运行说明<span>↗</span></a>
-      <a href="mcd-cuptez.html">直接进入创作（静态演示）<span>→</span></a>
+      <a href="https://github.com/JZCreative/mcd-cuptez/blob/main/README.md">README 与本地 MCP 运行说明<span>↗</span></a>
     </div>
   </main>
   <footer>

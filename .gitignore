@@ -1,0 +1,6 @@
+# 不应进入参赛仓库的文件
+mcd-cuptez.before-*.html
+.workbuddy/
+*.log
+node_modules/
+.DS_Store

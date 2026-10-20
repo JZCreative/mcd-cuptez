@@ -4,6 +4,8 @@
 
 本仓库为「麦当劳程序员创意开发大赛」参赛项目。
 
+🌐 **在线演示（GitHub Pages，静态版）**：https://jzcreative.github.io/mcd-cuptez/
+
 ---
 
 ## 一、项目简介
@@ -72,6 +74,13 @@ python3 mcp-proxy.py
 ```
 
 代理会托管页面并把同源 `/mcp` 请求转发到 `https://mcp.mcd.cn`，**Token 由服务端注入，不进入客户端代码**。加载即真实拉取当期活动并注入官方主题贴纸。可用环境变量 `MCP_PROXY_PORT` 改端口、`MCD_MCP_TOKEN` 显式指定 Token。
+
+### 方式 C：GitHub Pages 在线演示（静态托管）
+
+- **在线地址**：https://jzcreative.github.io/mcd-cuptez/
+- 由 GitHub Pages 静态托管，完整 UI、3D 容器、自由创作、艺术家贴纸与导出均可用。
+- **注意**：GitHub Pages 为纯静态托管，无法运行本地 `mcp-proxy.py`，故当期活动官方贴纸包以**静态占位**呈现；创作与导出功能完全不受影响。
+- 如需**真实联动麦当劳 MCP 数据**（当期活动自动注入、订单备注闭环），请使用上方「方式 B」在本机运行。
 
 ---
 
